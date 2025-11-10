@@ -75,22 +75,24 @@
 <div class="section" id="taryfikator">
   <h2>Lista wykroczeń</h2>
 
-  <label><input type="checkbox" value="RDM" data-min="6" data-max="72" data-desc="Random Deathmatch – zabicie bez powodu.">RDM</label>
+  <label><input type="checkbox" value="RDM" data-min="24" data-max="72" data-desc="Random Deathmatch – zabicie bez powodu.">RDM</label>
   <label><input type="checkbox" value="MASS RDM" data-min="999" data-max="999" data-desc="Masowe zabijanie bez powodu – permanentny ban.">MASS RDM</label>
-  <label><input type="checkbox" value="VDM" data-min="6" data-max="12" data-desc="Vehicle Deathmatch – potrącanie lub zabijanie pojazdem bez powodu.">VDM</label>
-  <label><input type="checkbox" value="CL" data-min="24" data-max="24" data-desc="Combat Log – wylogowanie się podczas akcji RP.">CL</label>
-  <label><input type="checkbox" value="FailRP" data-min="24" data-max="24" data-desc="Nieodgrywanie realistycznie swojej postaci lub ignorowanie zasad RP.">FailRP</label>
-  <label><input type="checkbox" value="Meta Gaming" data-min="12" data-max="24" data-desc="Wykorzystywanie informacji OOC w IC.">Meta Gaming</label>
-  <label><input type="checkbox" value="Power Gaming" data-min="12" data-max="24" data-desc="Wymuszanie sytuacji niemożliwych lub nielogicznych RP.">Power Gaming</label>
-  <label><input type="checkbox" value="CB" data-min="6" data-max="6" data-desc="Cop Baiting – prowokowanie policji bez powodu.">CB</label>
-  <label><input type="checkbox" value="RK" data-min="24" data-max="24" data-desc="Revenge Kill – zabicie tej samej osoby po respawnie.">RK</label>
-  <label><input type="checkbox" value="FCK" data-min="24" data-max="24" data-desc="Force Character Kill – zabicie bez zgody gracza.">FCK</label>
-  <label><input type="checkbox" value="BH" data-min="12" data-max="12" data-desc="Bunny Hop – skakanie w sposób nerealistyczny.">BH</label>
-  <label><input type="checkbox" value="OOC Abuse" data-min="6" data-max="6" data-desc="Nadużywanie czatu OOC, prowokacje.">OOC Abuse</label>
-  <label><input type="checkbox" value="SS" data-min="12" data-max="12" data-desc="Stream Sniping – oglądanie transmisji w celu uzyskania przewagi.">SS</label>
-  <label><input type="checkbox" value="FORCERP" data-min="12" data-max="12" data-desc="Wymuszanie odgrywania scen bez zgody drugiej strony.">FORCERP</label>
-  <label><input type="checkbox" value="FD" data-min="12" data-max="12" data-desc="Free Drive – bezcelowa jazda pojazdem.">FD</label>
-  <label><input type="checkbox" value="NZ" data-min="12" data-max="12" data-desc="Niestosowne zachowanie lub trolling.">NZ</label>
+  <label><input type="checkbox" value="VDM" data-min="12" data-max="24" data-desc="Vehicle Deathmatch – potrącanie lub zabijanie pojazdem bez powodu.">VDM</label>
+  <label><input type="checkbox" value="CL" data-min="24" data-max="72" data-desc="Combat Log – wylogowanie się podczas akcji RP.">CL</label>
+  <label><input type="checkbox" value="FailRP" data-min="24" data-max="48" data-desc="Nieodgrywanie realistycznie swojej postaci lub ignorowanie zasad RP.">FailRP</label>
+  <label><input type="checkbox" value="Meta Gaming" data-min="24" data-max="48" data-desc="Wykorzystywanie informacji OOC w IC.">Meta Gaming</label>
+  <label><input type="checkbox" value="Power Gaming" data-min="12" data-max="48" data-desc="Wymuszanie sytuacji niemożliwych lub nielogicznych RP.">Power Gaming</label>
+  <label><input type="checkbox" value="CB" data-min="48" data-max="72" data-desc="Cop Baiting – prowokowanie policji bez powodu.">CB</label>
+  <label><input type="checkbox" value="RK" data-min="12" data-max="24" data-desc="Revenge Kill – zabicie tej samej osoby po respawnie.">RK</label>
+  <label><input type="checkbox" value="FCK" data-min="24" data-max="72" data-desc="Force Character Kill – zabicie bez zgody gracza.">FCK</label>
+  <label><input type="checkbox" value="BH" data-min="12" data-max="48" data-desc="Bunny Hop – skakanie w sposób nerealistyczny.">BH</label>
+  <label><input type="checkbox" value="NfearRP" data-min="6" data-max="6" data-desc="No fearRP - ignorowanie zagrożenia życia lub zdrowia postaci i zachowywanie się w niebezpiecznej sytuacji, jakby nic się nie działo.">OOC Abuse</label>
+  <label><input type="checkbox" value="SS" data-min="12" data-max="24" data-desc="Stream Sniping – oglądanie transmisji w celu uzyskania przewagi.">SS</label>
+  <label><input type="checkbox" value="FORCERP" data-min="12" data-max="48" data-desc="Wymuszanie odgrywania scen bez zgody drugiej osoby.">FORCERP</label>
+  <label><input type="checkbox" value="FD" data-min="12" data-max="48" data-desc="Fail Driving - nierealistyczna jazda pojazdem.">FD</label>
+  <label><input type="checkbox" value="NZ" data-min="12" data-max="72" data-desc="Nie poszanowanie życia - zachowywanie się tak, jakby życie postaci nie miało żadnej wartości, ignorując realne zagrożenia w RP.">NZ</label>
+ <label><input type="checkbox" value="Wyzywanie ADM" data-min="6" data-max="72" data-desc="wyzywanie administracji.">RDM</label>
+ <label><input type="checkbox" value="SexRP" data-min="96" data-max="PERM" data-desc="Odgrywanie rzeczy 18+.">RDM</label>
 </div>
 
 <script>
@@ -130,7 +132,7 @@ function calculatePenalty() {
   });
 
   document.getElementById('result').innerText = output;
-  setTimeout(() => resetSelection(), 4000); // auto reset po 4 sek
+  setTimeout(() => resetSelection(), 4000); // auto reset po 100000 sek
 }
 </script>
 
