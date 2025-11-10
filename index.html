@@ -1,0 +1,138 @@
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>TaryfikatorBanów SataRP</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00bcd4;
+    }
+    h2 {
+      border-bottom: 1px solid #444;
+      padding-bottom: 5px;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    input[type="text"] {
+      background-color: #1e1e1e;
+      color: white;
+      border: 1px solid #555;
+      padding: 5px;
+      margin-bottom: 10px;
+      width: 300px;
+    }
+    button {
+      background-color: #333;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    .section {
+      margin-top: 20px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      white-space: pre-wrap;
+      border-top: 1px solid #333;
+      padding-top: 10px;
+    }
+    .desc {
+      margin-left: 20px;
+      color: #ccc;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<h1>TaryfikatorBanów SataRP</h1>
+
+<input type="text" id="filterInput" placeholder="Wyszukaj powód bana...">
+<button onclick="resetSelection()">Resetuj wybór</button>
+<button onclick="calculatePenalty()">Pokaż wynik</button>
+
+<div id="result"></div>
+
+<div class="section" id="taryfikator">
+  <h2>Lista wykroczeń</h2>
+
+  <label><input type="checkbox" value="RDM" data-min="6" data-max="72" data-desc="Random Deathmatch – zabicie bez powodu.">RDM</label>
+  <label><input type="checkbox" value="MASS RDM" data-min="999" data-max="999" data-desc="Masowe zabijanie bez powodu – permanentny ban.">MASS RDM</label>
+  <label><input type="checkbox" value="VDM" data-min="6" data-max="12" data-desc="Vehicle Deathmatch – potrącanie lub zabijanie pojazdem bez powodu.">VDM</label>
+  <label><input type="checkbox" value="CL" data-min="24" data-max="24" data-desc="Combat Log – wylogowanie się podczas akcji RP.">CL</label>
+  <label><input type="checkbox" value="FailRP" data-min="24" data-max="24" data-desc="Nieodgrywanie realistycznie swojej postaci lub ignorowanie zasad RP.">FailRP</label>
+  <label><input type="checkbox" value="Meta Gaming" data-min="12" data-max="24" data-desc="Wykorzystywanie informacji OOC w IC.">Meta Gaming</label>
+  <label><input type="checkbox" value="Power Gaming" data-min="12" data-max="24" data-desc="Wymuszanie sytuacji niemożliwych lub nielogicznych RP.">Power Gaming</label>
+  <label><input type="checkbox" value="CB" data-min="6" data-max="6" data-desc="Cop Baiting – prowokowanie policji bez powodu.">CB</label>
+  <label><input type="checkbox" value="RK" data-min="24" data-max="24" data-desc="Revenge Kill – zabicie tej samej osoby po respawnie.">RK</label>
+  <label><input type="checkbox" value="FCK" data-min="24" data-max="24" data-desc="Force Character Kill – zabicie bez zgody gracza.">FCK</label>
+  <label><input type="checkbox" value="BH" data-min="12" data-max="12" data-desc="Bunny Hop – skakanie w sposób nerealistyczny.">BH</label>
+  <label><input type="checkbox" value="OOC Abuse" data-min="6" data-max="6" data-desc="Nadużywanie czatu OOC, prowokacje.">OOC Abuse</label>
+  <label><input type="checkbox" value="SS" data-min="12" data-max="12" data-desc="Stream Sniping – oglądanie transmisji w celu uzyskania przewagi.">SS</label>
+  <label><input type="checkbox" value="FORCERP" data-min="12" data-max="12" data-desc="Wymuszanie odgrywania scen bez zgody drugiej strony.">FORCERP</label>
+  <label><input type="checkbox" value="FD" data-min="12" data-max="12" data-desc="Free Drive – bezcelowa jazda pojazdem.">FD</label>
+  <label><input type="checkbox" value="NZ" data-min="12" data-max="12" data-desc="Niestosowne zachowanie lub trolling.">NZ</label>
+</div>
+
+<script>
+document.getElementById('filterInput').addEventListener('input', function() {
+  const val = this.value.toLowerCase();
+  document.querySelectorAll('#taryfikator label').forEach(label => {
+    label.style.display = label.textContent.toLowerCase().includes(val) ? 'block' : 'none';
+  });
+});
+
+function resetSelection() {
+  document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+  document.getElementById('result').innerText = '';
+}
+
+function calculatePenalty() {
+  const selected = Array.from(document.querySelectorAll('input[type=checkbox]:checked'));
+  if (selected.length === 0) {
+    document.getElementById('result').innerText = 'Nie wybrano żadnego przewinienia.';
+    return;
+  }
+
+  let output = "📜 Wynik:\n\n";
+  selected.forEach(cb => {
+    const min = cb.dataset.min;
+    const max = cb.dataset.max;
+    const desc = cb.dataset.desc;
+    const name = cb.value;
+
+    if (name === "MASS RDM") {
+      output += `${name} – PERM BAN\nOpis: ${desc}\n\n`;
+    } else if (name === "Meta Gaming" || name === "Power Gaming") {
+      output += `${name}\nOpis: ${desc}\nMało: ${min}h | Dużo: ${max}h\n\n`;
+    } else {
+      output += `${name}\nOpis: ${desc}\nKara: od ${min}h do ${max === "999" ? "PERM" : max + "h"}\n\n`;
+    }
+  });
+
+  document.getElementById('result').innerText = output;
+  setTimeout(() => resetSelection(), 4000); // auto reset po 4 sek
+}
+</script>
+
+</body>
+</html>
